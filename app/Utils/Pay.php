@@ -21,7 +21,9 @@ class Pay
             case 'zfbjk':
                 return Pay::zfbjk_html($user);
             case 'f2fpay':
-                return Pay::f2fpay_html($user);                
+                return Pay::f2fpay_html($user); 
+            case 'qrcode':
+                return Pay::qrcode_html($user);                
             default:
                 return "";
         }
@@ -45,6 +47,13 @@ class Pay
         return '
 						<p>请扫码，给我转账来充值，记得备注上 <code>'.$user->id.'</code>。<br></p>
 						<img src="'.Config::get('zfbjk_qrcodeurl').'"/>
+';
+    }
+    private static function qrcode_html($user)
+    {
+        return '
+						<p>'.Config::get('pay_qrcodetext').'</p>
+						<img src="'.Config::get('pay_qrcodeurl').'" height="300" />
 ';
     }
     private static function f2fpay_html($user)
